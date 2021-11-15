@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standup of Standups</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="//unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Standup of Standups</h1>
+    <div x-data="{
+      teams: [
+        'Berners-Lee', 'Data Science', 'Graymalkin', 'Logicats', 'Solaris', 'Uniwolf',
+      ],
+    }" >
+      <ol x-init="teams = shuffle(teams)">
+        <template x-for="team in teams" :key="team">
+          <li x-data="{ done: false }" >
+            <label>
+              <input
+                type="checkbox"
+                x-model="done"
+                x-init="$watch('teams', () => $data.done = false)"
+              />
+              <span x-text="team"></span>
+            </label>
+          </li>
+        </template>
+      </ol>
+      <button @click="teams = shuffle(teams)">Shuffle</button>
+    </div>
+  </main>
+  <script type="text/javascript">
+    function shuffle(items) {
+      return items
+        .map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
+    }
+  </script>
+</body>
+</html>
