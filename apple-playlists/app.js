@@ -1,7 +1,9 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('app', () => ({
+    filter: '',
     get groups() {
-      return Object.entries(_.groupBy(window.playlistData, 'group')).map(([ group, playlists ]) => ({
+      let playlists = window.playlistData.filter((p) => !this.filter || p.slug.replace(/-/g, ' ').includes(this.filter.toLowerCase().trim()))
+      return Object.entries(_.groupBy(playlists, 'group')).map(([ group, playlists ]) => ({
         name: group,
         playlists,
       }))

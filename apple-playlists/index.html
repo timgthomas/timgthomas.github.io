@@ -8,13 +8,15 @@
   <script src="//unpkg.com/lodash@4.x.x/lodash.js"></script>
   <script defer src="//unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
+<body x-data="app">
   <header role="banner">
     <div class="constrained">
       <h1>Apple Playlists</h1>
+      <input x-model="filter" placeholder="Search">
     </div>
   </header>
-  <main x-data="app" class="constrained">
+  <main class="constrained">
+    <p x-show="!groups.length">No results.</p>
     <ul>
       <template x-for="group in groups" :key="group.name">
         <li class="group-item">
