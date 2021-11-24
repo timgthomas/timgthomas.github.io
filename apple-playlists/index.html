@@ -4,19 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apple Playlists</title>
+  <link rel="stylesheet" href="./style.css">
   <script src="//unpkg.com/lodash@4.x.x/lodash.js"></script>
   <script defer src="//unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-  <h1>Apple Playlists</h1>
-  <main x-data="app">
+  <header role="banner">
+    <div class="constrained">
+      <h1>Apple Playlists</h1>
+    </div>
+  </header>
+  <main x-data="app" class="constrained">
     <ul>
       <template x-for="group in groups" :key="group.name">
-        <li>
-          <span x-text="group.name"></span>
+        <li class="group-item">
+          <h1 x-text="group.name"></h1>
           <ul>
             <template x-for="playlist in group.playlists" :key="playlist.id">
-              <li>
+              <li class="playlist-item">
                 <a :href="buildHref(playlist)" x-text="_.startCase(playlist.slug)"></a>
               </li>
             </template>
