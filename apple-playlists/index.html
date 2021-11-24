@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Playlists</title>
+  <script src="//unpkg.com/lodash@4.x.x/lodash.js"></script>
+  <script defer src="//unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+  <h1>Apple Playlists</h1>
+  <main x-data="app">
+    <ul>
+      <template x-for="group in groups" :key="group.name">
+        <li>
+          <span x-text="group.name"></span>
+          <ul>
+            <template x-for="playlist in group.playlists" :key="playlist.id">
+              <li>
+                <a :href="buildHref(playlist)" x-text="_.startCase(playlist.slug)"></a>
+              </li>
+            </template>
+          </ul>
+        </li>
+      </template>
+    </ul>
+  </main>
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
